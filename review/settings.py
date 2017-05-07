@@ -15,11 +15,11 @@ import os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if DEBUG:
-    from secret_settings import *
-else:
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
+#if DEBUG:
+#    from secret_settings import *
+#else:
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,20 +29,20 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if DEBUG:
-    SECRET_KEY = secret_key
-else:
-    SECRET_KEY = os.environ['secret_key']
+#if DEBUG:
+#    SECRET_KEY = secret_key
+#else:
+SECRET_KEY = os.environ['secret_key']
 
 ALLOWED_HOSTS = [u'localhost', 'travelingwomentalk.com', 'www.travelingwomentalk.com']
 
 EMAIL_HOST = 'smtp.gmail.com'
-if DEBUG:
-    EMAIL_HOST_USER = email_user
-    EMAIL_HOST_PASSWORD = email_password
-else:
-    EMAIL_HOST_USER = os.environ['email_user']
-    EMAIL_HOST_PASSWORD = os.environ['email_password']
+#if DEBUG:
+#    EMAIL_HOST_USER = email_user
+#    EMAIL_HOST_PASSWORD = email_password
+#else:
+EMAIL_HOST_USER = os.environ['email_user']
+EMAIL_HOST_PASSWORD = os.environ['email_password']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # https://accounts.google.com/displayunlockcaptcha
