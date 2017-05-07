@@ -19,8 +19,6 @@ DEBUG = True
 #    from secret_settings import *
 #else:
 import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -103,14 +101,17 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'review',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'dfiurj56nng82e',
+        'USER': 'oiedsgfxijiiqw',
+        'PASSWORD': '9e849d510bd2054a766481e2e7696a59d8d96e698dde431147aa48627a462047',
+        'HOST': 'ec2-174-129-37-15.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
