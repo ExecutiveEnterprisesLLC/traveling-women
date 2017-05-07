@@ -33,7 +33,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #else:
 SECRET_KEY = os.environ['secret_key']
 
-ALLOWED_HOSTS = [u'localhost', 'travelingwomentalk.com', 'www.travelingwomentalk.com']
+ALLOWED_HOSTS = [u'pacific-badlands-91785.herokuapp.com', u'localhost', 'travelingwomentalk.com', 'www.travelingwomentalk.com']
 
 EMAIL_HOST = 'smtp.gmail.com'
 #if DEBUG:
