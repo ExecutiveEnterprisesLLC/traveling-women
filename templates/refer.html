@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head_title %}Refer a Friend{% endblock head_title %}
+
+{% block content %}
+
+<h1>{{ title }}</h1> <hr/>
+<p class='text-align-center lead'>{{ msg |safe }}</p><br><br>
+<form method='GET' action='' class='text-align-center'>
+    <input type='text' name='email' placeholder="Friend's Email" id='id_location' value='{{ request.GET.email }}' size='32px' class='searchfield'/>
+    <input class='btn btn-primary searchbtn'type='submit' value='Send' />
+</form>
+
+{% endblock content %}

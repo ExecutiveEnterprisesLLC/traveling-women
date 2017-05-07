@@ -1,0 +1,10 @@
+{% load i18n %}
+Hi! 
+
+A friend has invited you to Traveling Women Talk, a site where women share and read about other women's travels! 
+We care and want to hear all about your travels - where did you go, what did you do, was it great, would you go again or recommend to a friend?
+
+Go to http://www.travelingwomentalk.com to check it out!
+
+Thank you!
+-Team Traveling Women Talk

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
+
+{% block css %}
+.recent {
+    box-shadow:inset 0 -2px 0 #ffb1b0;
+}
+{% endblock %}
+
+{% block content %}
+
+<p><h3 style='display:inline'>{{ instance.author }}</h3><!-- - {{ instance.timestamp|timesince }} ago--> </p>
+<h3>{{ instance.location }}, {{ instance.service }}</h3>
+<p>{{ instance.comments|linebreaks }}</p>
+{% if instance.image %}
+<img src='{{ instance.image.url }}' class='img-responsive' />
+{% endif %}
+<hr/>
+
+<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+<br>
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+
+{% endblock content %}

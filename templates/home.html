@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block js %}
+function init() {
+    var input = document.getElementById('id_location');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
+google.maps.event.addDomListener(window, 'load', init);
+{% endblock %}
+
+{% block css %}
+.home {
+	box-shadow:inset 0 -2px 0 #ffb1b0;
+}
+{% endblock %}
+
+{% block head_title %}Home{% endblock %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+	<div class="container">
+		<div class='row'>
+            <div class='col-sm-8 text-align-center'>
+				<h1 style="text-size:36px;">Share & read about other women's travels!</h1>
+				<h4>We care and we want to hear all about your travels. Where did you go, what did you do, was it great, would you go again or recommend to a friend?</h4>
+				<br><br><form method='GET' action='./recent/'>
+			    <input type='text' name='q' placeholder='Search by Location' id='id_location' value='{{ request.GET.q }}' size='32px' class='searchfield'/>
+			    <input class='btn btn-primary searchbtn'type='submit' value='Search' />
+				</form>
+			</div>
+            <div class='col-sm-4'>
+				<p class='text-align-center'><br>
+					<a href="{% url 'create' %}" style="text-decoration:none;"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;Write a review</a><br><br>
+                    <a href="{% url 'recent' %}" style="text-decoration:none;"><i class="fa fa-file-text-o fa-lg" aria-hidden="true"></i>&nbsp;&nbsp; Read a Review</a><br><br>
+                    <a href="{% url 'refer' %}" style="text-decoration:none;" target="_blank"><i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>&nbsp;&nbsp; Refer a Friend</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<br>
+<!--  <h2>Watch This Wonderful Review!</h2> -->
+<div style="max-width:560px;max-height:315px;margin-left:auto;margin-right:auto;">
+	<div id="player1" class="slide"></div>
+    <div id="player2" class="slide"></div>
+    <div id="player3" class="slide"></div>
+
+    <div style="text-align:center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+</div>
+<script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player) after the API code downloads.
+      var player1, player2, player3;
+      function onYouTubeIframeAPIReady() {
+        player1 = new YT.Player('player1', {
+          height: '315',
+          width: '100%',
+          videoId: 'Bqfoax_SNfs',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        player2 = new YT.Player('player2', {
+          height: '315',
+          width: '100%',
+          videoId: 'DhHSALiOBYs',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        player3 = new YT.Player('player3', {
+          height: '315',
+          width: '100%',
+          videoId: 'jBGYM8djJ-Y',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        //event.target.playVideo();
+        
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      var done = false;
+      function onPlayerStateChange(event) {
+        //player1.stopVideo();
+        if (player1.getPlayerState()==1 || player2.getPlayerState()==1 || player3.getPlayerState()==1 ||player1.getPlayerState()==3 || player2.getPlayerState()==3 || player3.getPlayerState()==3){
+        clearTimeout(timeout);
+        }
+        else if (player1.getPlayerState()==0 || player2.getPlayerState()==0 || player3.getPlayerState()==0){
+        player1.stopVideo();
+        player2.stopVideo();
+        player3.stopVideo();
+        clearTimeout(timeout);
+        timeout = setTimeout(showSlides, 2000);
+        }
+        else if (player1.getPlayerState()==2 || player2.getPlayerState()==2 || player3.getPlayerState()==2){
+          clearTimeout(timeout);
+        timeout = setTimeout(showSlides, 2000);
+        }
+      }
+
+      var slideIndex = 0;
+      var timeout;
+      showSlides();
+
+      function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("slide");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+             slides[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex> slides.length) {slideIndex = 1}
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+          timeout = setTimeout(showSlides, 4000); 
+      }
+    </script>
+<br><br>
+{% endblock %}

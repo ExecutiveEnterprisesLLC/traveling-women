@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block css %}
+.recent {
+    box-shadow:inset 0 -2px 0 #ffb1b0;
+}
+{% endblock %}
+
+{% block js %}
+function init() {
+    var input = document.getElementById('id_location');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
+google.maps.event.addDomListener(window, 'load', init);
+{% endblock %}
+
+{% block head_title %}Reviews{% endblock head_title %}
+
+{% block content %}
+
+<h1>{{ title }}</h1> <hr/>
+<form method='GET' action=''>
+    <input type='text' name='q' placeholder='Search by Location' id='id_location' value='{{ request.GET.q }}' size='32px' class='searchfield'/>
+    <input class='btn btn-primary searchbtn'type='submit' value='Search' />
+</form>
+<hr/><br>
+
+{% for obj in object_list %}
+    
+        <h4>{{ obj.author}} <!-- - {{ obj.timestamp|timesince }} ago--></h4>
+        <h2><a href='{{ obj.get_absolute_url }}'>{{ obj.location }}, {{ obj.service }}</a></h2>
+        <p>{{ obj.comments|linebreaks|truncatechars:100 }}</p>
+      <hr/>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}
