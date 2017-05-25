@@ -29,8 +29,8 @@ def sitemap(request):
 	return render(request, "sitemap.xml", context)
 
 def home(request):
-	context = {}
-	return render(request, "home.html", context)
+    context = {}
+    return render(request, "home.html", context)
 
 def refer(request):
 	query = request.GET.get("email")
