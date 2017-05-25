@@ -9,7 +9,7 @@ class PostForm(forms.ModelForm):
 		fields = [
 			'service',
 			'location',
-			'image',
+			#'image',
 			'comments',
 		]
 		labels = {
