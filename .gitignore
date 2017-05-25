@@ -1,4 +1,6 @@
 review/secret_settings.py
+media/*
+!media/.gitkeep
 bin/
 include/
 pip-selfcheck.json
